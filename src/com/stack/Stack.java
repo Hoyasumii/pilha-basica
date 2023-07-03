@@ -1,16 +1,19 @@
 package com.stack;
 
-public class Stack<T> {
+import com.stack.interfaces.IStack;
+
+public class Stack<T> implements IStack<T> {
     protected Item<T> top;
     protected int size = 0;
 
-    public Stack() { }
+    public Stack() {}
 
     public Stack(T initialItem) {
         this.top = new Item<T>(initialItem);
         this.size++;
     }    
 
+    @Override
     public void push(T newItem) {
         if (this.size == 0) {
             this.top = new Item<T>(newItem);
@@ -24,10 +27,11 @@ public class Stack<T> {
         this.size++;
     }
 
-    public T pop() throws Exception {
+    @Override
+    public T pop() {
 
         if (this.size == 0) {
-            throw new Exception("A pilha está vazia", null);
+            return null;
         }
 
         T oldTop = this.top.item;
@@ -36,10 +40,15 @@ public class Stack<T> {
         return oldTop;
     }
 
-    public void clear() throws Exception {
-        while (this.size > 0) {
-            this.pop();
+    @Override
+    public void clear() {
+        
+        this.pop();
+
+        if (this.size > 0) {
+            this.clear();
         }
+
     }
 
     public Item<T> getTop() {
