@@ -1,15 +1,14 @@
 package com;
 
 import java.util.Scanner;
-import com.stack.*;
 
-// TODO: Fazer um modificador para a classe Scanner, parecido com o Console.ReadLine; entretanto, caso eu coloque um tipo que seja diferente do desejado, ao invés do programa resultar um erro, ele só irá mostrar novamente a pergunta
+import com.stack.*;
+import com.resources.*;
 
 public class App {
     public static void main(String[] args) throws Exception {
         
         boolean running = true;
-        Scanner scanner = new Scanner(System.in);
         Stack<Integer> stack = new Stack<Integer>();
         
         while (running) {
@@ -23,8 +22,7 @@ public class App {
                 System.out.println("\t[" + (index + 1) + "] " + options[index]);
             }
 
-            System.out.print("$ ");
-            int optionMenu = scanner.nextInt();
+            int optionMenu = ScannerImproved.nextInt("$ ");
 
             switch (optionMenu) {
                 case 1:
@@ -32,8 +30,7 @@ public class App {
                     System.out.println("[1] (" + stack.getSize() + ")" + stackIterator.run());
                     break;
                 case 2:
-                    System.out.print("[2] Choose the number to add: ");
-                    int newItem = scanner.nextInt();
+                    int newItem = ScannerImproved.nextInt("[2] Choose the number to add: ");
                     stack.push(newItem);
                     System.out.println("[2] " + newItem + " has been successfully added!");
                     break;
@@ -52,7 +49,6 @@ public class App {
                     running = false;
                     break;
                 default:
-                    System.out.println("[*] enter a valid value.");
                     break;
             }
 
@@ -60,8 +56,6 @@ public class App {
             System.out.println();
 
         }
-
-        scanner.close();
 
     }
 }
